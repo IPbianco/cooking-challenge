@@ -2,27 +2,26 @@ import nltk
 import unpack
 import collections
 
+class PosTagger:
 
-def get_counts(ingredients):
-    return collections.Counter(ingredients)
+    def remove(self, ingredient):
+        tokens = nltk.pos_tag(nltk.word_tokenize(ingredient))
+        new = [token for token, tag in tokens if self.tag_ok(tag)]
+        return ' '.join(new).lower()
 
+    def get_conditional_remove(self, counter, limit):
 
-def tag_ok(tag):
-    return tag == 'NN' or tag == 'NNS'
+        def conditional_remove(ingredient):
+            if counter[ingredient] < limit:
+                return self.remove(ingredient)
+            return ingredient.lower()
 
+        return conditional_remove
 
-def filter_pos_tags(ingredient):
-    tokens = nltk.pos_tag(nltk.word_tokenize(ingredient))
-    filtered = [token for token, tag in tokens if tag_ok(tag)]
-    return ' '.join(filtered).lower()
+    def tag_ok(self, tag):
+        return tag in ['NN', 'NNS']
 
+    def convert(self, ingredients, counter, limit=0):
+        converter = self.get_conditional_remove(counter, limit)
+        return list(map(converter, ingredients))
 
-def filter_ingredients(ing, limit):
-    converted = []
-    counts = get_counts(ing)
-    for ingredient in ing:
-        if counts[ingredient] < limit:
-            converted.append(filter_pos_tags(ingredient))
-        else:
-            converted.append(ingredient.lower())
-    return list(filter(lambda i: i.islower(), set(converted)))
