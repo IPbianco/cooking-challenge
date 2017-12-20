@@ -10,6 +10,7 @@ class Ingredients:
         self.mapping = self.get_mapping(self.original, pos_tag_threshold)
         self.converted = self._map(self.original, self.mapping)
         self.convert_data(self.data, self.mapping)
+        self.df = None
 
     def get_all(self, data):
         ingredients = []
@@ -44,8 +45,8 @@ class Ingredients:
         self.df = Vectoriser(self.converted, limit).vectorise(self.data)
         return self.df
 
-    def save(path):
-        if not self.df:
+    def save(self, path):
+        if self.df is None:
             raise ValueError('not yet vectorised')
         self.df.to_csv(path)
 

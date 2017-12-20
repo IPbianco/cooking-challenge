@@ -1,10 +1,23 @@
 import sys
+import pandas
 
 sys.path.append('source')
 
-import to_csv
+import ingredients
+import unpack
+
+limit = 0
+convert = 0
+
+for arg in sys.argv:
+    if 'limit=' in arg:
+        limit = int(arg.split('=')[1])
+    elif 'convert=' in arg:
+        convert = int(arg.split('=')[1])
 
 if 'generate' in sys.argv:
-    df = to_csv.to_csv('train.json')
+    i = ingredients.Ingredients(unpack.unpack('train.json'), convert)
+    df = i.vectorise(limit)
+    i.save('train.csv')
 elif 'open' in sys.argv:
-    df = to_csv.from_csv('train.csv')
+    df = pandas.read_csv('train.csv')
