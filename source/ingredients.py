@@ -48,5 +48,4 @@ class Ingredients:
     def save(self, path):
         if self.df is None:
             raise ValueError('not yet vectorised')
-        self.df.to_csv(path)
-
+        self.df.to_csv(path, index=False, header=False)
