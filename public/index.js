@@ -16,7 +16,7 @@ $(document).ready(function() {
   $('#cook-button').click(function() {
     $.post('/', { id: 1, cuisine: "", ingredients: cookingList }, function() {
       $.get('/prediction', function(data) {
-        $('#prediction-div').append(data.prediction)
+        $('#prediction-div').append(`<p id="prediction">${data.prediction}</p>`)
       })
     })
   })

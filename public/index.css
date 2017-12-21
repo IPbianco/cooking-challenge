@@ -1,0 +1,115 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: whitesmoke;
+  background-image: url(https://i2.wp.com/motherhoodtherealdeal.com/wp-content/uploads/2017/06/OMHY540.jpg?fit=4479%2C2986&ssl=1);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+ul {
+  position: absolute;
+  list-style-type: none;
+  font-size: 30px;
+  width: 50%;
+  top: 50%;
+  left: 1%;
+  color: beige;
+  font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
+}
+
+h5 {
+  position: absolute;
+  top: 5%;
+  font-family: "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
+  font-size: 40px;
+  text-align: left;
+  top: 40%;
+  color: ivory;
+}
+
+.content {
+  position: absolute;
+  left: 25%;
+  top: 5%;
+  width: 50%;
+  height: 90%;
+}
+
+
+
+#title {
+  position: absolute;
+  width: 100%;
+  font-family: "Arial Rounded MT Bold", "Helvetica Rounded", Arial, sans-serif;
+  font-size: 100px;
+  text-align: center;
+  color: ivory;
+}
+
+#single-ingredient {
+  position: absolute;
+  border-width: thin;
+  border-style: solid;
+  border-color: lightgrey;
+  top: 25%;
+  font-size: 90%;
+  font-weight: lighter;
+  text-align: center;
+  height: 5%;
+  width: 50%;
+  left: 25%;
+  background-color: whitesmoke;
+}
+
+#add-button {
+  position: absolute;
+  border-width: medium;
+  border-style: solid;
+  border-color: beige;
+  top: 32.5%;
+  font-size: 90%;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  height: 5%;
+  width: 20%;
+  left: 28%;
+  background-color: olivedrab;
+}
+
+#cook-button {
+  position: absolute;
+  border-width: medium;
+  border-style: solid;
+  border-color: beige;
+  top: 32.5%;
+  font-size: 90%;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  height: 5%;
+  width: 20%;
+  left: 52%;
+  background-color: olivedrab;
+}
+
+#prediction-div {
+  position: absolute;
+  text-align: center;
+  left: 20%;
+  top: 40%;
+  width: 60%;
+  height: 50%;
+}
+
+#prediction {
+  font-size: 180px;
+  color: tomato;
+  height: 100%;
+  width: 100%;
+}

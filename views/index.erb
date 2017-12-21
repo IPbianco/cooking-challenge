@@ -3,14 +3,21 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <link rel="stylesheet" href="index.css" type="text/css">
   </head>
   <body>
-    <%= @name %>
-    <input id="single-ingredient" type="text">
-    <input id="add-button" type="button" value="add">
-    <ul id="cooking-list"></ul>
-    <input id="cook-button" type="button" value="cook">
+
+    <div class="content">
+      <h1 id="title">Smart cook</h1>
+      <input id="single-ingredient" type="text" placeholder="ENTER INGREDIENT"><br><br>
+      <input id="add-button" type="button" value="Add">
+      <h5>Recipe:</h5>
+      <ul id="cooking-list"></ul>
+      <input id="cook-button" type="button" value="cook">
+    </div>
+
     <div id="prediction-div"></div>
+
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="index.js"></script>
   </body>
