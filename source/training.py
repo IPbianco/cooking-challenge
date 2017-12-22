@@ -5,8 +5,16 @@ import ingredients
 import unpack
 from sklearn.externals import joblib
 
+# Default values assigned from looper.py results
 convert = 40
 limit = 0
+
+# Allows user to override default convert and limit values when generating model
+for arg in sys.argv:
+    if 'limit=' in arg:
+        limit = int(arg.split('=')[1])
+    elif 'convert=' in arg:
+        convert = int(arg.split('=')[1])
 
 i = ingredients.Ingredients(unpack.unpack('train.json'), convert)
 df = i.vectorise(limit)
