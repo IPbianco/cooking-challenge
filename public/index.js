@@ -7,7 +7,6 @@ $(document).ready(function() {
   var str
   var ingredientsList
 
-
   $.get('/ingredients', function(data) {
     ingredientsList = data.ingredients;
     $('#single-ingredient').autocomplete({
