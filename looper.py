@@ -10,20 +10,29 @@ import ingredients
 import unpack
 
 all_scores = []
+algorithm = LogisticRegression()
 
-for convert in range(0, 250, 10):
+def create_train_and_test_sets(data, limit):
+    df = data.vectorise(limit)
+    X = df.drop(columns='cuisine')
+    y = df['cuisine']
+    return train_test_split(X, y, test_size=0.4, random_state=42)
+
+def train_and_score_model(algorithm, X_train, X_test, y_train, y_test):
+    clf = algorithm
+    model = clf.fit(X_train, y_train)
+    return model.score(X_test, y_test)
+
+
+for convert in range(1):
     i = ingredients.Ingredients(unpack.unpack('train.json'), convert)
     current_cycle = []
     single = [convert]
     for limit in range(1):
         single.append(limit)
-        df = i.vectorise(limit)
-        X = df.drop(columns='cuisine')
-        y = df['cuisine']
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.4, random_state=42)
-        clf = LogisticRegression()
-        model = clf.fit(X_train, y_train)
-        single.append(model.score(X_test, y_test))
+        X_train, X_test, y_train, y_test = create_train_and_test_sets(i, limit)
+        score = train_and_score_model(algorithm, X_train, X_test, y_train, y_test)
+        single.append(score)
         current_cycle.append(single)
         print(single)
         single = [convert]
