@@ -18,6 +18,6 @@ for arg in sys.argv:
 if 'generate' in sys.argv:
     i = ingredients.Ingredients(unpack.unpack('train.json'), convert)
     df = i.vectorise(limit)
-    i.save('train.csv')
+    i.save('data/train.csv')
 elif 'open' in sys.argv:
-    df = pandas.read_csv('train.csv')
+    df = pandas.read_csv('data/train.csv')
