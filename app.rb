@@ -24,5 +24,14 @@ class Cooking < Sinatra::Base
     { prediction: session[:prediction] }.to_json
   end
 
+  get '/ingredients' do
+    content_type :json
+    ingredients = `python3 source/ingredients_list.py`
+    ingredients = ingredients.split("', '")
+    ingredients.shift
+    ingredients.pop
+    { ingredients: ingredients }.to_json
+  end
+
   run! if app_file == $0
 end
