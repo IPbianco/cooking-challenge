@@ -5,6 +5,15 @@ $(document).ready(function() {
   var ingredient
   var cookingList = []
   var str
+  var ingredientsList
+
+
+  $.get('/ingredients', function(data) {
+    ingredientsList = data.ingredients;
+    $('#single-ingredient').autocomplete({
+      source: ingredientsList
+    });
+  })
 
   $('#add-button').click(function() {
     ingredient = $('#single-ingredient').val()
@@ -20,4 +29,5 @@ $(document).ready(function() {
       })
     })
   })
+
 })
