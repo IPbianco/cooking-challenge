@@ -5,8 +5,8 @@ import ingredients
 import unpack
 from sklearn.externals import joblib
 
-convert = 50
-limit = 20
+convert = 40
+limit = 0
 
 i = ingredients.Ingredients(unpack.unpack('train.json'), convert)
 df = i.vectorise(limit)
