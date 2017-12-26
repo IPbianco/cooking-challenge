@@ -6,7 +6,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.svm import LinearSVC
 
 # Importing first-party scripts
-sys.path.append('source')
+# sys.path.append('source')
 import ingredients
 import unpack
 
