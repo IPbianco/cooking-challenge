@@ -1,6 +1,6 @@
 # Cooking Up A Storm
 
-[Introduction](#introduction) | [Running the App](#running-the-app) | [Approach](#approach) | [Challenges](#challenges) | [Limitations](#limitations)
+[Introduction](#introduction) | [Running the App](#running-the-app) | [Approach](#approach) | [Challenges](#challenges) | [Limitations](#limitations) | [Try to Beat Us](#try-to-beat-us)
 
 ## Introduction
 
@@ -32,12 +32,33 @@ As mentioned above, we paired on FizzBuzz and learned by doing in order to gain 
 
 One of the problems we ran into when doing so was the fact that our dataset was muddied, with ingredients including brand names, or items such as '50% fat cheese' - an item not meaningfully different from 'cheese'. We took two approaches to tackle this issue. The first was to remove any instances of ingredients mentioned below a certain threshold (the 'limit'), dismissing them as statistically insignificant. The second technique we used was to make use of [NLTK](http://www.nltk.org/) to remove all words from ingredients that were not either singular or plural nouns, again below a certain threshold (the 'convert').
 
-Armed with these two techniques, we needed to establish the optimal parameters for the convert and the limit. To do so, we wrote a short script that would take in parameters for the algorithm, and ranges for the limit and convert, and cycle through each combination of these parameters, and then return the best performing set of parameters. However, this is a computationally intensive task, and could take hours to run, depending on the algorithm and ranges for both the limit and the convert, making exhaustive tests impractical. The optimal parameters we found were a limit of 0, and a convert of 40 - which is the parameters for the dataset the current algorithm is trained on. 
+Armed with these two techniques, we needed to establish the optimal parameters for the convert and the limit. To do so, we wrote a short script that would take in parameters for the algorithm, and ranges for the limit and convert, and cycle through each combination of these parameters, and then return the best performing set of parameters. However, this is a computationally intensive task, and could take hours to run, depending on the algorithm and ranges for both the limit and the convert, making exhaustive tests impractical. The optimal parameters we found were a limit of 0, and a convert of 40 - which is the parameters for the dataset the current algorithm is trained on.
 
 
 ## Limitations
 
- The current implementation of this app has a few limitations. For example, the algorithm takes into account quantities of ingredients used to classify by cuisine. This means that the application works well with full ingredient sets, but for partial ingredient sets, results can be skewed. In addition to this, there also seems to be a bias regarding the size of the dataset for each cuisine, skewing results to cuisines such as Italian, which have more entries than cuisines such as Brazilian. For example, inputting just 'sake', a distinctly Japanese ingredient, often returns a guess of Italian, a cuisine which tends to have shorter ingredient lists. Any future implementations of this application should take these limitations into account and attempt to resolve them.
+ The current implementation of this app has a few limitations. For example, the algorithm takes into account quantities of ingredients used to classify by cuisine. This means that the application works well with full ingredient sets, but for partial ingredient sets, results can be skewed. In addition to this, there also seems to be a bias regarding the size of the dataset for each cuisine, skewing results to cuisines such as Italian, which have more entries than cuisines such as Brazilian. For example, inputting just 'sake', a distinctly Japanese ingredient, often returns a guess of Italian, a cuisine which tends to have shorter ingredient lists. Any future implementations of this application should take these limitations into account and attempt to resolve them
+
+
+## Try to Beat Us
+
+Given the limited time we had to complete this project, it is unlikely that our results are the best they could be. Our current model, a [Logistic Regression](http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html) model trained on a convert of 40 and a limit of 0, has an accuracy score of 77.37%.
+
+To attempt to beat us, you will first need to select a suitable machine learning algorithm to use. [Scikit Learn](http://scikit-learn.org/stable/index.html) might be a good place to start. Once you have selected an algorithm, import the function into `source/looper.py` at the top of the file in a format that will look something like this: `from sklearn.linear_model import LogisticRegression`. Then pass this in, with brackets, as an argument to `l = Looper()` on line 105.
+
+You will then need to establish the optimum set of parameters for the limit and the convert (see above). You can do this with the looper file, which will cycle through the given algorithm with different values for the limit and the convert, and return the best performing parameters. This can be done by running `source/looper.py` in the command line. You can specify two arguments, `limit` and `convert`. For either of these, specify three values, separated by commas. These values will be, in order, the lower limit, the upper limit, and the step, for the given argument. If either argument is not given, these values will default to 0, 101, and 10 respectively. The command will look something like the following:
+
+`python3 source/looper.py limit=30,60,5 convert=30,60,5`
+
+This command will return the best-performing combination of parameters from the given values. If it is higher than 0.7736643620364551, then congratulations - you've beaten us!
+
+To run this script, you will need to have [Python](https://www.python.org/), [Pandas](https://pandas.pydata.org/getpandas.html), and [Scikit Learn](http://scikit-learn.org/stable/install.html) installed. N.b. Running `source/looper.py` is a memory-intensive task. It is **strongly recommended** to run this script initially with high step values and a broad range, before narrowing down to find optimal parameters.
+
+Once you have found the best set of values for your algorithm, to integrate it into the application you will need to recreate your dataset and retrain your model. This can be done in a single command in the command line. Run `python3 source/training.py` in the command line. Specify `limit=X` and `convert=Y` in your arguments, substituting X and Y for the best-performing values returned by `looper.py`. The full command will look something like the following:
+
+`python3 source/training.py limit=42 convert=127`
+
+Congratulations! You have just beaten us at our own game. Go forth, and cook some delicious food. 
 
 
 Cooking Up A Storm was built by [Andrew](https://github.com/ajdavey8), [Ignacio](https://github.com/IPbianco), [Peter](https://github.com/peterwdj), and [Theo](https://github.com/somemarsupials).
