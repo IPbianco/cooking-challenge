@@ -3,12 +3,27 @@ import sys
 import pandas
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
-from sklearn.svm import LinearSVC
 
 # Importing first-party scripts
-# sys.path.append('source')
 import ingredients
 import unpack
+
+limit_lower = 0
+limit_upper = 101
+limit_step = 10
+convert_lower = 0
+convert_upper = 101
+convert_step = 10
+
+for arg in sys.argv:
+    if 'limit=' in arg:
+        limit_lower = int(arg.split('=')[1].split(',')[0])
+        limit_upper = int(arg.split('=')[1].split(',')[1])
+        limit_step = int(arg.split('=')[1].split(',')[2])
+    if 'convert=' in arg:
+        convert_lower = int(arg.split('=')[1].split(',')[0])
+        convert_upper = int(arg.split('=')[1].split(',')[1])
+        convert_step  = int(arg.split('=')[1].split(',')[2])
 
 
 class Looper:
@@ -58,11 +73,12 @@ class Looper:
         self.complete_current_and_reset_single(convert)
 
     def loop(self):
-        for convert in range(1):
+        for convert in range(convert_lower, convert_upper, convert_step):
             self.create_current_cycle_array(convert)
-            for limit in range(1):
+            for limit in range(limit_lower, limit_upper, limit_step):
                 self.update_and_reset_cycle(limit, convert)
             self.all_scores.append(self.current_cycle)
+
 
 class Printer:
 
