@@ -11,7 +11,6 @@ import ingredients
 import unpack
 
 
-
 class Looper:
 
     def __init__(self, algorithm=LogisticRegression()):
@@ -72,13 +71,15 @@ class Printer:
         self.result = []
         self.score_set = score_set
 
+    def update_best_score(self, array):
+        if array[2] > self.score:
+            self.score = array[2]
+            self.result = array
 
     def find_best_result(self):
         for x in self.score_set:
             for y in x:
-                if y[2] > self.score:
-                    self.score = y[2]
-                    self.result = y
+                self.update_best_score(y)
 
     def print_results(self):
         self.find_best_result()
